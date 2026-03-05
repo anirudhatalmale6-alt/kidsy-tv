@@ -24,9 +24,9 @@ class ChannelAdapter(
         val channel = channels[position]
         holder.binding.channelName.text = channel.name
 
-        if (!channel.logo.isNullOrEmpty()) {
+        if (!channel.getLogoUrl().isNullOrEmpty()) {
             Glide.with(holder.itemView.context)
-                .load(channel.logo)
+                .load(channel.getLogoUrl())
                 .placeholder(R.mipmap.ic_launcher)
                 .circleCrop()
                 .into(holder.binding.channelLogo)

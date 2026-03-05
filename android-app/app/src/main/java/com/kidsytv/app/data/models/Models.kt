@@ -1,6 +1,14 @@
 package com.kidsytv.app.data.models
 
 import com.google.gson.annotations.SerializedName
+import com.kidsytv.app.BuildConfig
+
+private fun resolveUrl(url: String): String {
+    if (url.startsWith("http://") || url.startsWith("https://")) return url
+    // Relative path like /uploads/... — prepend server base URL
+    val serverBase = BuildConfig.API_BASE_URL.removeSuffix("/api").removeSuffix("/")
+    return "$serverBase$url"
+}
 
 // Auth
 data class RegisterRequest(
@@ -48,7 +56,8 @@ data class Channel(
     val isActive: Boolean,
     val viewCount: Int
 ) {
-    fun getPlayableUrl(): String = resolvedUrl ?: streamUrl
+    fun getPlayableUrl(): String = resolveUrl(resolvedUrl ?: streamUrl)
+    fun getLogoUrl(): String? = logo?.let { resolveUrl(it) }
 }
 
 data class ChannelsResponse(val channels: List<Channel>)
@@ -71,7 +80,8 @@ data class Video(
     val viewCount: Int,
     val isFeatured: Boolean
 ) {
-    fun getPlayableUrl(): String = resolvedUrl ?: videoUrl
+    fun getPlayableUrl(): String = resolveUrl(resolvedUrl ?: videoUrl)
+    fun getThumbnailUrl(): String? = thumbnail?.let { resolveUrl(it) }
 }
 
 data class VideosResponse(

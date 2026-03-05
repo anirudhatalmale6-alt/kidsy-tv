@@ -23,9 +23,9 @@ class VideoHorizontalAdapter(
         val video = videos[position]
         holder.binding.videoTitle.text = video.title
 
-        if (!video.thumbnail.isNullOrEmpty()) {
+        if (!video.getThumbnailUrl().isNullOrEmpty()) {
             Glide.with(holder.itemView.context)
-                .load(video.thumbnail)
+                .load(video.getThumbnailUrl())
                 .centerCrop()
                 .into(holder.binding.videoThumbnail)
         }

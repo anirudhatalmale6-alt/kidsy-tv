@@ -32,9 +32,9 @@ class VideoAdapter(
             holder.binding.videoDuration.text = ""
         }
 
-        if (!video.thumbnail.isNullOrEmpty()) {
+        if (!video.getThumbnailUrl().isNullOrEmpty()) {
             Glide.with(holder.itemView.context)
-                .load(video.thumbnail)
+                .load(video.getThumbnailUrl())
                 .centerCrop()
                 .into(holder.binding.videoThumbnail)
         }
