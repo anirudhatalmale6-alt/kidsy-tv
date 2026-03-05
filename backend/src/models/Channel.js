@@ -15,6 +15,10 @@ const Channel = sequelize.define('Channel', {
     type: DataTypes.TEXT,
     allowNull: false,
   },
+  resolvedUrl: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  },
   streamType: {
     type: DataTypes.ENUM('hls', 'dash', 'rtmp', 'other'),
     defaultValue: 'hls',

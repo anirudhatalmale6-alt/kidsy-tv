@@ -1,4 +1,5 @@
 const { Video, Category } = require('../models');
+const { resolveStreamUrl } = require('../utils/streamResolver');
 
 const getAll = async (req, res) => {
   try {
@@ -85,6 +86,10 @@ const create = async (req, res) => {
     if (req.files?.thumbnail?.[0]) {
       data.thumbnail = `/uploads/thumbnails/${req.files.thumbnail[0].filename}`;
     }
+    // Auto-resolve Castr player URLs to direct stream URLs
+    if (data.videoUrl && data.videoType !== 'upload') {
+      data.resolvedUrl = await resolveStreamUrl(data.videoUrl);
+    }
     const video = await Video.create(data);
     res.status(201).json({ video });
   } catch (err) {
@@ -104,6 +109,10 @@ const update = async (req, res) => {
     }
     if (req.files?.thumbnail?.[0]) {
       data.thumbnail = `/uploads/thumbnails/${req.files.thumbnail[0].filename}`;
+    }
+    // Auto-resolve Castr player URLs to direct stream URLs
+    if (data.videoUrl && data.videoType !== 'upload') {
+      data.resolvedUrl = await resolveStreamUrl(data.videoUrl);
     }
     await video.update(data);
     res.json({ video });

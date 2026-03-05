@@ -20,9 +20,22 @@ app.use('/api/channels', require('./routes/channels'));
 app.use('/api/videos', require('./routes/videos'));
 app.use('/api/users', require('./routes/users'));
 
+// Stream URL resolver (resolves Castr player URLs to direct HLS/MP4)
+const { resolveStreamUrl } = require('./utils/streamResolver');
+app.post('/api/resolve-stream', async (req, res) => {
+  try {
+    const { url } = req.body;
+    if (!url) return res.status(400).json({ error: 'URL required' });
+    const resolved = await resolveStreamUrl(url);
+    res.json({ url: resolved });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', app: 'Kidsy TV API', version: '1.0.0' });
+  res.json({ status: 'ok', app: 'Kidsy TV Channel API', version: '1.1.0' });
 });
 
 // Serve admin panel

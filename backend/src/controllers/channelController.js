@@ -1,4 +1,5 @@
 const { Channel, Category } = require('../models');
+const { resolveStreamUrl } = require('../utils/streamResolver');
 
 const getAll = async (req, res) => {
   try {
@@ -48,6 +49,10 @@ const create = async (req, res) => {
   try {
     const data = { ...req.body };
     if (req.file) data.logo = `/uploads/logos/${req.file.filename}`;
+    // Auto-resolve Castr player URLs to direct stream URLs
+    if (data.streamUrl) {
+      data.resolvedUrl = await resolveStreamUrl(data.streamUrl);
+    }
     const channel = await Channel.create(data);
     res.status(201).json({ channel });
   } catch (err) {
@@ -62,6 +67,10 @@ const update = async (req, res) => {
 
     const data = { ...req.body };
     if (req.file) data.logo = `/uploads/logos/${req.file.filename}`;
+    // Auto-resolve Castr player URLs to direct stream URLs
+    if (data.streamUrl) {
+      data.resolvedUrl = await resolveStreamUrl(data.streamUrl);
+    }
     await channel.update(data);
     res.json({ channel });
   } catch (err) {

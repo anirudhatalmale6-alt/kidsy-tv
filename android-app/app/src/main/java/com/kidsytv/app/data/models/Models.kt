@@ -38,6 +38,7 @@ data class Channel(
     val id: String,
     val name: String,
     val streamUrl: String,
+    val resolvedUrl: String?,
     val streamType: String,
     val logo: String?,
     val description: String?,
@@ -46,7 +47,9 @@ data class Channel(
     val order: Int,
     val isActive: Boolean,
     val viewCount: Int
-)
+) {
+    fun getPlayableUrl(): String = resolvedUrl ?: streamUrl
+}
 
 data class ChannelsResponse(val channels: List<Channel>)
 data class ChannelResponse(val channel: Channel)
@@ -57,6 +60,7 @@ data class Video(
     val title: String,
     val description: String?,
     val videoUrl: String,
+    val resolvedUrl: String?,
     val videoType: String,
     val thumbnail: String?,
     val duration: Int?,
@@ -66,7 +70,9 @@ data class Video(
     val isActive: Boolean,
     val viewCount: Int,
     val isFeatured: Boolean
-)
+) {
+    fun getPlayableUrl(): String = resolvedUrl ?: videoUrl
+}
 
 data class VideosResponse(
     val videos: List<Video>,

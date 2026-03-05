@@ -76,7 +76,7 @@ class HomeFragment : Fragment() {
 
     private fun onChannelClick(channel: Channel) {
         startActivity(Intent(requireContext(), PlayerActivity::class.java).apply {
-            putExtra("stream_url", channel.streamUrl)
+            putExtra("stream_url", channel.getPlayableUrl())
             putExtra("title", channel.name)
             putExtra("is_live", true)
         })
@@ -84,7 +84,7 @@ class HomeFragment : Fragment() {
 
     private fun onVideoClick(video: Video) {
         startActivity(Intent(requireContext(), PlayerActivity::class.java).apply {
-            putExtra("stream_url", video.videoUrl)
+            putExtra("stream_url", video.getPlayableUrl())
             putExtra("title", video.title)
             putExtra("is_live", false)
         })

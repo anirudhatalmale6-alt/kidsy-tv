@@ -19,6 +19,10 @@ const Video = sequelize.define('Video', {
     type: DataTypes.TEXT,
     allowNull: false,
   },
+  resolvedUrl: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  },
   videoType: {
     type: DataTypes.ENUM('upload', 'url'),
     defaultValue: 'url',
