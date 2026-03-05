@@ -11,11 +11,11 @@ android {
         applicationId = "com.kidsytv.app"
         minSdk = 21
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 3
+        versionName = "1.3"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "API_BASE_URL", "\"https://new-institutes-instead-discipline.trycloudflare.com/api\"")
+        buildConfigField("String", "API_BASE_URL", "\"https://oohlivetv.com/kidsytv/api\"")
     }
 
     buildTypes {

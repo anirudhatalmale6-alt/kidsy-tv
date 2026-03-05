@@ -1,13 +1,24 @@
 const { Sequelize } = require('sequelize');
 const path = require('path');
-require('dotenv').config();
+require('dotenv').config({ path: path.join(__dirname, '..', '..', '.env') });
 
 const dbDialect = process.env.DB_DIALECT || 'sqlite';
 
 let sequelize;
 
 if (dbDialect === 'sqlite') {
-  const storagePath = process.env.DB_STORAGE || path.join(__dirname, '..', '..', 'data', 'kidsy_tv.db');
+  const projectRoot = path.join(__dirname, '..', '..');
+  let storagePath = process.env.DB_STORAGE || path.join(projectRoot, 'data', 'kidsy_tv.db');
+  // Resolve relative paths against project root, not CWD
+  if (!path.isAbsolute(storagePath)) {
+    storagePath = path.join(projectRoot, storagePath);
+  }
+  // Ensure the data directory exists
+  const fs = require('fs');
+  const dataDir = path.dirname(storagePath);
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
+  }
   sequelize = new Sequelize({
     dialect: 'sqlite',
     storage: storagePath,
