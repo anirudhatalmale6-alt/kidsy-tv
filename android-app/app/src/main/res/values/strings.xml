@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Kidsy TV</string>
+    <string name="welcome_title">Welcome to Kidsy TV</string>
+    <string name="welcome_subtitle">Watch your favorite channels and videos</string>
+    <string name="enter_name">Enter your name</string>
+    <string name="enter_phone">Enter your phone number</string>
+    <string name="select_country">Select Country</string>
+    <string name="start_watching">Start Watching</string>
+    <string name="live_channels">Live Channels</string>
+    <string name="on_demand">Videos</string>
+    <string name="favorites">Favorites</string>
+    <string name="search">Search</string>
+    <string name="no_channels">No channels available</string>
+    <string name="no_videos">No videos available</string>
+    <string name="loading">Loading...</string>
+    <string name="error_network">Network error. Please check your connection.</string>
+    <string name="error_stream">Unable to play this stream</string>
+    <string name="live">LIVE</string>
+    <string name="views">views</string>
+</resources>

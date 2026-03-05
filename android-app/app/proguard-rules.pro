@@ -1,0 +1,1 @@
+# Kidsy TV ProGuard rules
