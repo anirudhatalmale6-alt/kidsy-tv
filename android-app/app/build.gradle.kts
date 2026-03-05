@@ -15,7 +15,7 @@ android {
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "API_BASE_URL", "\"https://your-server.com/api\"")
+        buildConfigField("String", "API_BASE_URL", "\"https://new-institutes-instead-discipline.trycloudflare.com/api\"")
     }
 
     buildTypes {
